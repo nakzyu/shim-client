@@ -1,9 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <MainNavigation />
+    </div>
+  );
 }
 
 export default App;
