@@ -3,5 +3,5 @@
   color: #03dcff;
   text-shadow: 0.2rem 0.2rem #ff5bfd;
   font-weight: 700;
-  font-size: 3rem;
+  font-size: calc(1.5rem + 2vw);
 }

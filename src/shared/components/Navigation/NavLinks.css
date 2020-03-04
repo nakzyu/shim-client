@@ -14,8 +14,8 @@ ul {
   cursor: pointer;
   display: block;
   align-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: calc(3rem + 0.5vw);
+  height: calc(3rem + 0.5vw);
   position: absolute;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
@@ -36,7 +36,9 @@ ul {
   opacity: 0;
   z-index: 1;
 }
-/* hover */
+
+/*  */
+
 .nav-links li:hover > img:nth-child(1) {
   filter: alpha(opacity=0);
   opacity: 0;
@@ -48,6 +50,14 @@ ul {
   z-index: 2;
 }
 
-.nav-navigator {
-  background: url("../../../assets/iconmonstr-door-6-64.png");
+a.active > li > img:nth-child(1) {
+  filter: alpha(opacity=0);
+  opacity: 0;
+  z-index: 1;
+}
+
+a.active > li > img:nth-child(2) {
+  filter: alpha(opacity=100);
+  opacity: 1;
+  z-index: 2;
 }

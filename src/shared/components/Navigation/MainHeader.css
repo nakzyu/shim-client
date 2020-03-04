@@ -3,5 +3,8 @@
   width: 100vw;
   align-items: center;
   justify-content: space-around;
-  min-height: 10vh;
+  min-height: 5vh;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }

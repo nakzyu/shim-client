@@ -1,0 +1,15 @@
+.post-lists {
+  width: 90vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .post-lists {
+    width: 100%;
+  }
+}

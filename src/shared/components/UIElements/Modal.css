@@ -1,0 +1,32 @@
+.modal {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.modal-image {
+  object-fit: cover;
+  height: 90vh;
+  width: auto;
+}
+
+.modal-content {
+  font-size: 1rem;
+  background: white;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-wrapper {
+    flex-direction: column;
+  }
+  .modal-image {
+    height: 60vh;
+  }
+}
