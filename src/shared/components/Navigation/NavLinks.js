@@ -6,7 +6,7 @@ import "./NavLinks.css";
 const NavLinks = props => {
   return (
     <ul className="nav-links">
-      <NavLink to="/userPost" exact>
+      <NavLink to="/user/u1" exact>
         <li className="nav-user center">
           <img
             src={require("../../../assets/iconmonstr-user-20-64.png")}

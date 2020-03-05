@@ -1,8 +1,18 @@
-import React from "react";
-import PostHolder from "../components/PostHolder";
-import "./PostList.css";
+import React, { Fragment } from "react";
+import UserProfile from "../components/UserProfile";
+import PostList from "../../posts/pages/PostList";
+import { useParams } from "react-router";
 
-const PostsList = props => {
+const User = () => {
+  const USERS = [
+    {
+      id: "u1",
+      name: "Cha",
+      image:
+        "https://images.pexels.com/photos/1637114/pexels-photo-1637114.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+      places: 3
+    }
+  ];
   const DUMMY_POST = [
     {
       postId: "p1",
@@ -86,13 +96,16 @@ const PostsList = props => {
     }
   ];
 
+  const userId = useParams().userId;
+  const filterbyUserID = DUMMY_POST.filter(post => post.creator === userId);
+
   return (
-    <ul className="post-lists">
-      {props.item && props.item.length > 0
-        ? props.item.map(item => <PostHolder {...item} />)
-        : DUMMY_POST.map(item => <PostHolder {...item} />)}
-    </ul>
+    <div className="user_and_postlist">
+      {console.log(filterbyUserID)}
+      <UserProfile item={USERS} />
+      <PostList item={filterbyUserID} />
+    </div>
   );
 };
 
-export default PostsList;
+export default User;
