@@ -30,7 +30,7 @@ const NavLinks = props => {
           />
         </li>
       </NavLink>
-      <NavLink to="/newPost" exact>
+      <NavLink to="/addPost" exact>
         <li className="nav-addPost center">
           <img
             src={require("../../../assets/iconmonstr-plus-6-64.png")}
@@ -45,11 +45,11 @@ const NavLinks = props => {
       <NavLink to="/auth" exact>
         <li className="nav-logOut center">
           <img
-            src={require("../../../assets/iconmonstr-door-8-64.png")}
+            src={require("../../../assets/iconmonstr-door-7-64.png")}
             alt="logOut"
           />
           <img
-            src={require("../../../assets/iconmonstr-door-6-64.png")}
+            src={require("../../../assets/iconmonstr-door-5-64.png")}
             alt="logOut"
           />
         </li>

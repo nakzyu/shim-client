@@ -1,0 +1,35 @@
+.auth-container {
+  position: relative;
+
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-side {
+  height: 100%;
+}
+
+.auth-logo {
+  color: #03dcff;
+  text-shadow: 0.2rem 0.2rem #ff5bfd;
+  font-weight: 700;
+  font-size: calc(1.5rem + 2vw);
+  cursor: pointer;
+}
+
+.auth-side img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.auth-form {
+  margin-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
