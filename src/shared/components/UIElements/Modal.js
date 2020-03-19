@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { createPortal } from "react-dom";
 import "./Modal.css";
 import Backdrop from "./Backdrop";
+import { Link } from "react-router-dom";
 
 const DUMMY = {
   postId: "p1",

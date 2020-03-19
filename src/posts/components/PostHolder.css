@@ -2,15 +2,14 @@
   justify-content: space-around;
   cursor: pointer;
   background: #f7f7f7;
-  border: 1px solid #efefef;
-  width: calc(10rem + 15vw);
-  height: calc(10rem + 15vw);
-  overflow: hidden;
+
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 2rem;
+  background: white;
 }
 
 .post-holder img {
-  object-fit: cover;
   width: 100%;
-  height: 100%;
   color: black;
 }

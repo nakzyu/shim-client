@@ -4,7 +4,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar1",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u1"
   },
   {
@@ -28,7 +28,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/2603464/pexels-photo-2603464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u1"
   },
   {
@@ -36,7 +36,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/1317712/pexels-photo-1317712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u2"
   },
   {
@@ -44,7 +44,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/3905907/pexels-photo-3905907.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u2"
   },
   {
@@ -52,7 +52,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/3722683/pexels-photo-3722683.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u1"
   },
   {
@@ -68,7 +68,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u6"
   },
   {
@@ -84,7 +84,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/3655865/pexels-photo-3655865.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u7"
   },
   {
@@ -92,7 +92,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/3777622/pexels-photo-3777622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u7"
   },
   {
@@ -108,7 +108,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/3738087/pexels-photo-3738087.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u7"
   },
   {
@@ -124,7 +124,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/2376712/pexels-photo-2376712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u7"
   },
   {
@@ -140,7 +140,7 @@ const DUMMY_POST = [
     date: "2020-03-03",
     description: "Cigar4",
     imageUrl:
-      "https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/2849046/pexels-photo-2849046.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     creator: "u7"
   },
   {

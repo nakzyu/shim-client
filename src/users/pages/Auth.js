@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Auth.css";
 import Input from "../../shared/components/FormElements/Input";
 
@@ -9,10 +9,13 @@ import {
 } from "../../shared/util/validators";
 
 import { useForm } from "../../shared/hooks/form-hook";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
+import { AuthContext } from "../../shared/context/auth-context";
 const Auth = () => {
+  const auth = useContext(AuthContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [isLoginMode, setIsLoginMode] = useState(true);
-
   const [formState, inputHandler, setFormData] = useForm({
     email: {
       value: "",
@@ -53,6 +56,40 @@ const Auth = () => {
     setIsLoginMode(prevMode => !prevMode);
   };
 
+  const authSubmitHandler = async event => {
+    event.preventDefault();
+
+    if (isLoginMode) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/login",
+          "POST",
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          }),
+          { "Content-Type": "application/json" }
+        );
+        auth.login(responseData.user.id);
+      } catch (err) {}
+    } else {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/signup",
+          "POST",
+          JSON.stringify({
+            name: formState.inputs.name.value,
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          }),
+          { "Content-Type": "application/json" }
+        );
+
+        auth.login(responseData.user.id);
+      } catch (err) {}
+    }
+  };
+
   return (
     <div className="auth-container">
       <div className="auth-side">
@@ -63,7 +100,7 @@ const Auth = () => {
       </div>
       <div className="auth-form">
         <div className="auth-logo">shim</div>
-        <form onSubmit={console.log(formState)}>
+        <form onSubmit={authSubmitHandler}>
           {!isLoginMode && (
             <Input
               element="input"
