@@ -22,7 +22,7 @@ const App = () => {
           <MainNavigation />
           <Explore />
         </Route>
-        <Route path="/user/:userId" exact>
+        <Route path="/user/:userId">
           <MainNavigation />
           <User />
         </Route>

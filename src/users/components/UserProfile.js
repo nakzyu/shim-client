@@ -34,9 +34,9 @@ const UserProfile = props => {
 
   const descriptionSubmitHandler = async event => {
     event.preventDefault();
-    console.log(formState);
+
     try {
-      const responseData = await sendRequest(
+      await sendRequest(
         `http://localhost:5000/api/users/updateDescription/${auth.userId}`,
         "PATCH",
         JSON.stringify({
@@ -52,6 +52,7 @@ const UserProfile = props => {
   };
 
   const FormHandler = async event => {
+    event.preventDefault();
     if (showForm) {
       descriptionSubmitHandler(event);
       setShowForm(!showForm);
@@ -101,7 +102,10 @@ const UserProfile = props => {
           </div>
         </div>
       </div>
-      <form className="user-profile_description">
+      <form
+        className="user-profile_description"
+        onSubmit={descriptionSubmitHandler}
+      >
         {showForm ? (
           <Input
             element="input"
