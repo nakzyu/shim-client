@@ -6,25 +6,16 @@ import User from "../src/users/pages/User";
 import AddPost from "../src/posts/pages/AddPost";
 import Auth from "../src/users/pages/Auth";
 import { AuthContext } from "./shared/context/auth-context";
+import { useAuth } from "./shared/hooks/auth-hook";
+
 import "./App.css";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(false);
-
-  const login = useCallback(uid => {
-    setIsLoggedIn(true);
-    setUserId(uid);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-    setUserId(null);
-  }, []);
+  const { token, login, logout, userId } = useAuth();
 
   let routes;
 
-  if (isLoggedIn) {
+  if (token) {
     routes = (
       <Switch>
         <Route path="/" exact>
@@ -63,8 +54,9 @@ const App = () => {
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn,
-        userId,
+        isLoggedIn: !!token,
+        token,
+        userId: userId,
         login,
         logout
       }}

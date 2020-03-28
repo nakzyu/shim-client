@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-import { useHistory } from "react-router-dom";
 import "./PostHolder.css";
 import Modal from "../../shared/components/UIElements/Modal";
 
@@ -8,7 +7,8 @@ const PostHolder = props => {
 
   const openModalHandelr = () => {
     setShowModal(true);
-    window.history.replaceState(null, null, `/post/${props.postId}`);
+    console.log(props);
+    window.history.replaceState(null, null, `/post/${props._id}`);
   };
 
   const closeModalHandelr = () => {
@@ -19,7 +19,7 @@ const PostHolder = props => {
   return (
     <Fragment>
       <div className="post-holder" onClick={openModalHandelr}>
-        <img src={`${props.imageUrl}`} alt={`${props.postId}`} />
+        <img src={`${props.image}`} alt={`${props.postId}`} />
       </div>
       {showModal && (
         <Modal show={showModal} onCancel={closeModalHandelr} {...props} />

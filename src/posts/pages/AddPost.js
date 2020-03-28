@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
@@ -9,10 +10,13 @@ import {
 } from "../../shared/util/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { AuthContext } from "../../shared/context/auth-context";
 
 import "./AddPost.css";
 
 const AddPost = () => {
+  const history = useHistory();
+  const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler] = useForm(
     {
@@ -32,14 +36,20 @@ const AddPost = () => {
     try {
       const formData = new FormData();
       formData.append("description", formState.inputs.description.value);
-      formData.append("creator", "5e6dc9f35f5489354c66246d");
+      formData.append("creator", auth.userId);
       formData.append("image", formState.inputs.image.value);
-      await sendRequest("http://localhost:5000/api/posts", "POST", formData);
+      formData.append("date", Date.now());
+      console.log(formData);
+      await sendRequest("http://localhost:5000/api/posts", "POST", formData, {
+        Authorization: "Bearer " + auth.token
+      });
+
+      history.push("/");
     } catch (err) {}
   };
 
   return (
-    <form className="place-form" onSubmit={postSubmitHandler}>
+    <form className="post-form" onSubmit={postSubmitHandler}>
       <Input
         id="description"
         element="textarea"

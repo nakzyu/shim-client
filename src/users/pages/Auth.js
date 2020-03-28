@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 import "./Auth.css";
 import Input from "../../shared/components/FormElements/Input";
 
@@ -13,6 +15,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import { AuthContext } from "../../shared/context/auth-context";
 const Auth = () => {
+  const history = useHistory();
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -70,7 +73,9 @@ const Auth = () => {
           }),
           { "Content-Type": "application/json" }
         );
-        auth.login(responseData.user.id);
+        console.log(responseData);
+        auth.login(responseData.userId, responseData.token);
+        history.push("/");
       } catch (err) {}
     } else {
       try {
@@ -85,7 +90,8 @@ const Auth = () => {
           { "Content-Type": "application/json" }
         );
 
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
+        history.push("/");
       } catch (err) {}
     }
   };

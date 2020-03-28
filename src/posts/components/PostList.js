@@ -1,9 +1,39 @@
-import React, { useEffect, useState, useCallback, Fragment } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  Fragment,
+  useParams
+} from "react";
 import PostHolder from "./PostHolder";
-import "./PostList.css";
-import DUMMY_POST from "../../DUMMY_POST";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
-const PostList = () => {
+import "./PostList.css";
+
+const PostList = props => {
+  const [loadedPosts, setLoadedPosts] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        if (props.userId) {
+          const responseData = await sendRequest(
+            `http://localhost:5000/api/posts/user/${props.userId}`
+          );
+          console.log(responseData);
+          setLoadedPosts(responseData.posts);
+        } else {
+          const responseData = await sendRequest(
+            `http://localhost:5000/api/posts`
+          );
+          setLoadedPosts(responseData.post);
+        }
+      } catch (err) {}
+    };
+    fetchPosts();
+  }, [sendRequest, props.userId]);
+
   const [column, setColumn] = useState(() => {
     if (window.innerWidtht >= 1900) {
       return 4;
@@ -43,7 +73,7 @@ const PostList = () => {
 
       const lines = [line1, line2, line3, line4];
 
-      DUMMY_POST.forEach((item, index) => {
+      loadedPosts.forEach((item, index) => {
         lines[index % 4].push(item);
       });
 
@@ -79,7 +109,7 @@ const PostList = () => {
 
       const lines = [line1, line2, line3];
 
-      DUMMY_POST.forEach((item, index) => {
+      loadedPosts.forEach((item, index) => {
         lines[index % 3].push(item);
       });
 
@@ -110,7 +140,7 @@ const PostList = () => {
 
       const lines = [line1, line2];
 
-      DUMMY_POST.forEach((item, index) => {
+      loadedPosts.forEach((item, index) => {
         lines[index % 2].push(item);
       });
 
@@ -135,7 +165,7 @@ const PostList = () => {
 
       const lines = [line1];
 
-      DUMMY_POST.forEach((item, index) => {
+      loadedPosts.forEach((item, index) => {
         lines[index % 1].push(item);
       });
 
@@ -151,7 +181,7 @@ const PostList = () => {
     } else return;
   };
 
-  return <Fragment> {conditionalRender()}</Fragment>;
+  return <Fragment> {loadedPosts && conditionalRender()}</Fragment>;
 };
 
 export default PostList;

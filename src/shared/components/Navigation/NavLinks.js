@@ -10,7 +10,7 @@ const NavLinks = props => {
   return (
     <ul className="nav-links">
       {auth.isLoggedIn && (
-        <NavLink to="/user/u1" exact>
+        <NavLink to={`/user/${auth.userId}`} exact>
           <li className="nav-user center">
             <img
               src={require("../../../assets/iconmonstr-user-20-64.png")}
@@ -64,7 +64,7 @@ const NavLinks = props => {
           </li>
         </div>
       ) : (
-        <NavLink to="/auth" exact onClick={auth.login}>
+        <NavLink to="/auth" exact>
           <li className="nav-logOut center">
             <img
               src={require("../../../assets/iconmonstr-door-7-64.png")}
