@@ -51,8 +51,7 @@ const UserProfile = props => {
     } catch (err) {}
   };
 
-  const FormHandler = async event => {
-    event.preventDefault();
+  const FormHandler = event => {
     if (showForm) {
       descriptionSubmitHandler(event);
       setShowForm(!showForm);

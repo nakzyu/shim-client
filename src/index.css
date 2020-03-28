@@ -12,6 +12,10 @@ body {
   padding: 0;
 }
 
+body a {
+  text-decoration: none;
+}
+
 .center {
   text-align: center;
   display: flex;

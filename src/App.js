@@ -22,16 +22,16 @@ const App = () => {
           <MainNavigation />
           <Explore />
         </Route>
-        <Route path="/user/:userId">
-          <MainNavigation />
-          <User />
-        </Route>
         <Route path="/addPost" exact>
           <MainNavigation />
           <AddPost />
         </Route>
         <Route path="/auth" exact>
           <Auth />
+        </Route>
+        <Route path="/user/:userId" exact>
+          <MainNavigation />
+          <User />
         </Route>
         <Redirect to="/" />
       </Switch>
@@ -45,6 +45,10 @@ const App = () => {
         </Route>
         <Route path="/auth" exact>
           <Auth />
+        </Route>
+        <Route path="/user/:userId" exact>
+          <MainNavigation />
+          <User />
         </Route>
         <Redirect to="/" />
       </Switch>

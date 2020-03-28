@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 
 const User = () => {
   const userId = useParams().userId;
-  console.log(userId);
+
   return (
     <Fragment>
       <UserProfile userId={userId} />

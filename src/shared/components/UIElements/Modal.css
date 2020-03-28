@@ -19,7 +19,27 @@
 
 .modal-content {
   font-size: 1rem;
+  min-width: 25rem;
   background: white;
+}
+
+.modal-content-img_name {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 0.01rem solid lightgray;
+}
+
+.modal-content-profile_img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.modal-content-profile_name {
+  font-size: 2rem;
+  margin-left: 1rem;
+  color: black;
 }
 
 @media screen and (max-width: 768px) {
