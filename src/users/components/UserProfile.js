@@ -14,7 +14,7 @@ import "./UserProfile.css";
 const UserProfile = props => {
   const auth = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const [loadedUser, setLoadedUser] = useState();
   const [formState, inputHandler] = useForm({
     description: {
@@ -32,9 +32,29 @@ const UserProfile = props => {
     setShowModal(false);
   };
 
-  const FormHandler = () => {
+  const descriptionSubmitHandler = async event => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:5000/api/users/updateDescription/${auth.userId}`,
+        "PATCH",
+        JSON.stringify({
+          description: formState.inputs.description.value
+        }),
+        {
+          Authorization: "Bearer " + auth.token,
+          "Content-Type": "application/json"
+        }
+      );
+      fetchUser();
+    } catch (err) {}
+  };
+
+  const FormHandler = async event => {
     if (showForm) {
-      descriptionSubmitHandler();
+      descriptionSubmitHandler(event);
+      setShowForm(!showForm);
     }
     setShowForm(!showForm);
   };
@@ -52,27 +72,6 @@ const UserProfile = props => {
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
-
-  const descriptionSubmitHandler = async event => {
-    event.preventDefault();
-    console.log(formState);
-    try {
-      const responseData = await sendRequest(
-        `http://localhost:5000/api/users/updateDescription/${auth.userId}`,
-        "PATCH",
-        JSON.stringify({
-          description: formState.inputs.description.value
-        }),
-        {
-          Authorization: "Bearer " + auth.token,
-          "Content-Type": "application/json"
-        }
-      );
-      console.log(responseData);
-    } catch (err) {
-      console.log("failed");
-    }
-  };
 
   return (
     <div className="user-profile">
@@ -118,11 +117,7 @@ const UserProfile = props => {
           </div>
         )}
         {props.userId === auth.userId && (
-          <ul
-            className="user-profile_edit"
-            type="submit"
-            onClick={descriptionSubmitHandler}
-          >
+          <ul className="user-profile_edit" type="submit" onClick={FormHandler}>
             <li>
               <img
                 src={require("../../assets/iconmonstr-pencil-5-32.png")}
