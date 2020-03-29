@@ -18,6 +18,8 @@
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
   font-size: 1rem;
   min-width: 25rem;
   background: white;
@@ -26,8 +28,9 @@
 .modal-content-img_name {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-bottom: 0.01rem solid lightgray;
+  flex: 1;
 }
 
 .modal-content-profile_img {
@@ -40,6 +43,18 @@
   font-size: 2rem;
   margin-left: 1rem;
   color: black;
+}
+
+.modal-description {
+  display: flex;
+  flex: 7;
+}
+
+.modal-function {
+  display: flex;
+  flex: 0.8;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {

@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Explore from "./posts/pages/Explore";
+import UpdatePost from "./posts/pages/UpdatePost";
 import User from "../src/users/pages/User";
 import AddPost from "../src/posts/pages/AddPost";
 import Auth from "../src/users/pages/Auth";
@@ -25,6 +26,10 @@ const App = () => {
         <Route path="/addPost" exact>
           <MainNavigation />
           <AddPost />
+        </Route>
+        <Route path="/updatePost/:postId" exact>
+          <MainNavigation />
+          <UpdatePost />
         </Route>
         <Route path="/auth" exact>
           <Auth />

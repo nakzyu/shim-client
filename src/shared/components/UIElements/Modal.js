@@ -1,12 +1,20 @@
-import React, { Fragment, useCallback, useState, useEffect } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useState,
+  useEffect,
+  useContext
+} from "react";
 import { Link } from "react-router-dom";
 import { createPortal } from "react-dom";
 import "./Modal.css";
 import Backdrop from "./Backdrop";
+import { AuthContext } from "../../context/auth-context";
 
 import { useHttpClient } from "../../hooks/http-hook";
 
 const ModalOverlay = props => {
+  const auth = useContext(AuthContext);
   const [loadedUser, setLoadedUser] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const fetchUser = useCallback(async () => {
@@ -14,10 +22,52 @@ const ModalOverlay = props => {
       const responseData = await sendRequest(
         `http://localhost:5000/api/users/${props.creator}`
       );
-      console.log(responseData);
+
       setLoadedUser(responseData);
     } catch (err) {}
   }, [sendRequest, props.creator]);
+
+  const deleteHandler = async () => {
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/posts/${props._id}`,
+        "DELETE",
+        null,
+        { Authorization: "Bearer " + auth.token }
+      );
+      props.onDelete(props.id);
+    } catch (err) {}
+  };
+
+  const postLikeHandler = async () => {
+    const responseData = await sendRequest(
+      `http://localhost:5000/api/posts/like/${props._id}`,
+      "POST",
+      JSON.stringify({
+        userId: auth.userId
+      }),
+      {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth.token
+      }
+    );
+    console.log(responseData);
+  };
+
+  const postUnLikeHandler = async () => {
+    const responseData = await sendRequest(
+      `http://localhost:5000/api/posts/like/${props._id}`,
+      "DELETE",
+      JSON.stringify({
+        userId: auth.userId
+      }),
+      {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + auth.token
+      }
+    );
+    console.log(responseData);
+  };
 
   useEffect(() => {
     fetchUser();
@@ -44,7 +94,19 @@ const ModalOverlay = props => {
             </Link>
           </div>
 
-          <div>description</div>
+          <div className="modal-description">{props.description}</div>
+          <div className="modal-function">
+            <Link to={`/updatePost/${props._id}`}>
+              <div className="modal-function_update">d</div>
+            </Link>
+            <div className="modal-function_delete" onClick={deleteHandler}>
+              d
+            </div>
+            <div className="modal-function_like" onClick={postLikeHandler}>
+              {props.likes.length}
+            </div>
+            <button onClick={postUnLikeHandler}>unline</button>
+          </div>
         </div>
       </div>
     </div>
