@@ -42,11 +42,13 @@ const ModalOverlay = props => {
   };
 
   const content = (
-    <div className="modal centered profileModal">
+    <div className="modal center profileModal">
       <div className="modal-wrapper">
         <form onSubmit={imageSubmitHandler}>
           <ImageUpload id="image" onInput={inputHandler} />
-          <button type="submit">image submit</button>
+          <button className="submit" type="submit">
+            SUBMIT
+          </button>
         </form>
       </div>
     </div>

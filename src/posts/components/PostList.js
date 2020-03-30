@@ -7,32 +7,62 @@ import React, {
 } from "react";
 import PostHolder from "./PostHolder";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import BottomScrollListener from "react-bottom-scroll-listener";
 
 import "./PostList.css";
 
 const PostList = props => {
-  const [loadedPosts, setLoadedPosts] = useState();
+  const [isEnd, setIsEnd] = useState(false);
+  const [pageCount, setPageCount] = useState(2);
+  const [loadedPosts, setLoadedPosts] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        if (props.userId) {
-          const responseData = await sendRequest(
-            `http://localhost:5000/api/posts/user/${props.userId}`
-          );
-          console.log(responseData);
-          setLoadedPosts(responseData.posts);
-        } else {
-          const responseData = await sendRequest(
-            `http://localhost:5000/api/posts`
-          );
-          setLoadedPosts(responseData.post);
+  const fetchPosts = useCallback(async () => {
+    try {
+      if (props.userId) {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/posts/user/${props.userId}`
+        );
+        console.log(responseData);
+        setLoadedPosts(responseData.posts);
+      } else {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/posts?page=1&limit=12`
+        );
+
+        setLoadedPosts(responseData.results);
+      }
+    } catch (err) {}
+  }, [props.userId, sendRequest]);
+
+  const fetchMorePosts = useCallback(async () => {
+    if (isEnd) {
+      return console.log("reached end!");
+    }
+    try {
+      if (props.userId) {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/posts/user/${props.userId}`
+        );
+
+        setLoadedPosts(responseData.posts);
+      } else {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/posts?page=${pageCount}&limit=12`
+        );
+
+        if (responseData.results.length < 12) {
+          setIsEnd(true);
         }
-      } catch (err) {}
-    };
+        setLoadedPosts(state => [...state, ...responseData.results]);
+        setPageCount(state => (state += 1));
+      }
+    } catch (err) {}
+  }, [isEnd, props.userId, sendRequest, pageCount]);
+
+  useEffect(() => {
     fetchPosts();
-  }, [sendRequest, props.userId]);
+  }, [fetchPosts]);
 
   const [column, setColumn] = useState(() => {
     if (window.innerWidtht >= 1900) {
@@ -181,7 +211,13 @@ const PostList = props => {
     } else return;
   };
 
-  return <Fragment> {loadedPosts && conditionalRender()}</Fragment>;
+  return (
+    <Fragment>
+      <BottomScrollListener onBottom={fetchMorePosts}>
+        {loadedPosts && conditionalRender()}
+      </BottomScrollListener>
+    </Fragment>
+  );
 };
 
 export default PostList;

@@ -49,7 +49,8 @@ const AddPost = () => {
   };
 
   return (
-    <form className="post-form" onSubmit={postSubmitHandler}>
+    <form className="form-control add-place-form" onSubmit={postSubmitHandler}>
+      <ImageUpload id="image" onInput={inputHandler} />
       <Input
         id="description"
         element="textarea"
@@ -58,12 +59,9 @@ const AddPost = () => {
         errorText="Content required"
         onInput={inputHandler}
       />
-      <ImageUpload
-        id="image"
-        onInput={inputHandler}
-        errorText="Please provide an image."
-      />
-      <button type="submit">submit</button>
+      <button className="submit" type="submit">
+        SUBMIT
+      </button>
     </form>
   );
 };

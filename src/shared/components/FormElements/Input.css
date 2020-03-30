@@ -1,11 +1,13 @@
 .form-control {
+  width: calc(15rem + 5vw);
   margin: 1rem 0;
 }
 
 .form-control label,
-.form-control input,
-.form-control textarea {
+.form-control input {
   display: block;
+  height: 2rem;
+  width: 100%;
 }
 
 .form-control label {

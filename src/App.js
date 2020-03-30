@@ -9,6 +9,7 @@ import Auth from "../src/users/pages/Auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
 
+import "./shared/components/FormElements/Button.css";
 import "./App.css";
 
 const App = () => {

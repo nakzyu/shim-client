@@ -1,3 +1,33 @@
+.image-upload {
+  color: #ffa6e1;
+  font-size: 3rem;
+
+  text-shadow: 0.2rem 0.2rem #30f2f5;
+  cursor: pointer;
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+.image-upload:hover {
+  -webkit-filter: grayscale(80%);
+  -moz-filter: grayscale(80%);
+  filter: grayscale(80%);
+  transition: all 0.5s ease;
+}
+
+.hover_img a {
+  position: relative;
+}
+.hover_img a span {
+  position: absolute;
+  display: none;
+  z-index: 99;
+}
+.hover_img a:hover span {
+  display: block;
+}
+
 .image-upload.center {
   display: flex;
   justify-content: center;
@@ -6,8 +36,8 @@
 }
 
 .image-upload__preview {
-  width: 13rem;
-  height: 13rem;
+  width: calc(20rem + 5vw);
+  height: calc(20rem + 5vw);
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;
@@ -20,4 +50,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+  .image-upload {
+    text-shadow: 0.1rem 0.1rem #30f2f5;
+  }
 }

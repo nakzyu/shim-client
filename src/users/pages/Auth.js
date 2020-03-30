@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
-import "./Auth.css";
 import Input from "../../shared/components/FormElements/Input";
 
 import {
@@ -14,9 +13,16 @@ import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import { AuthContext } from "../../shared/context/auth-context";
+
+import "./Auth.css";
 const Auth = () => {
   const history = useHistory();
   const auth = useContext(AuthContext);
+
+  const [authImage, setAuthImage] = useState(() => {
+    if (window.innerWidth >= 768) return true;
+    if (window.innerWidth < 768) return false;
+  });
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formState, inputHandler, setFormData] = useForm({
@@ -96,17 +102,32 @@ const Auth = () => {
     }
   };
 
+  const updateAuthImage = useCallback(() => {
+    if (window.innerWidth >= 768) {
+      setAuthImage(true);
+    }
+    if (window.innerWidth < 768) {
+      setAuthImage(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateAuthImage);
+  }, [updateAuthImage]);
+
   return (
     <div className="auth-container">
-      <div className="auth-side">
-        <img
-          src={require("../../assets/modern-building-3034343.jpg")}
-          alt="building"
-        />
-      </div>
-      <div className="auth-form">
+      {authImage && (
+        <div className="auth-side">
+          <img
+            src={require("../../assets/modern-building-3034343.jpg")}
+            alt="building"
+          />
+        </div>
+      )}
+      <div>
         <div className="auth-logo">shim</div>
-        <form onSubmit={authSubmitHandler}>
+        <form className="auth-form" onSubmit={authSubmitHandler}>
           {!isLoginMode && (
             <Input
               element="input"
@@ -136,9 +157,11 @@ const Auth = () => {
             errorText="Please enter a valid password, at least 5 characters."
             onInput={inputHandler}
           />
-          <button type="submit">submit</button>
+          <button className="submit" type="submit">
+            SUBMIT
+          </button>
         </form>
-        <button inverse onClick={switchModeHandler}>
+        <button className="switch" onClick={switchModeHandler}>
           SWITCH TO {isLoginMode ? "SIGNUP" : "LOGIN"}
         </button>
       </div>

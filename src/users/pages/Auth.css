@@ -17,7 +17,7 @@
   color: #03dcff;
   text-shadow: 0.2rem 0.2rem #ff5bfd;
   font-weight: 700;
-  font-size: calc(1.5rem + 2vw);
+  font-size: calc(3rem + 2vw);
   cursor: pointer;
 }
 
@@ -27,9 +27,30 @@
 }
 
 .auth-form {
-  margin-left: 2rem;
+  margin: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.switch {
+  background: #90b69e;
+  width: calc(15rem + 5vw);
+}
+
+.switch:hover,
+.swtich:focus {
+  background: #90b69e;
+}
+
+.submit {
+  background: #e2bbca;
+  width: calc(15rem + 5vw);
+}
+
+.submit:hover,
+.submit:focus {
+  background: #e2bbca;
 }

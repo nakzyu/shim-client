@@ -4,6 +4,7 @@ ul {
 
 .nav-links {
   display: flex;
+  padding: 0;
 }
 
 .nav-links li {

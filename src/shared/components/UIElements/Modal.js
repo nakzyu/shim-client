@@ -43,9 +43,7 @@ const ModalOverlay = props => {
     const responseData = await sendRequest(
       `http://localhost:5000/api/posts/like/${props._id}`,
       "POST",
-      JSON.stringify({
-        userId: auth.userId
-      }),
+      null,
       {
         "Content-Type": "application/json",
         Authorization: "Bearer " + auth.token
@@ -97,15 +95,41 @@ const ModalOverlay = props => {
           <div className="modal-description">{props.description}</div>
           <div className="modal-function">
             <Link to={`/updatePost/${props._id}`}>
-              <div className="modal-function_update">d</div>
+              <li>
+                <img
+                  src={require("../../../assets/iconmonstr-pencil-5-32.png")}
+                  alt="edit"
+                />
+                <img
+                  src={require("../../../assets/iconmonstr-pencil-4-32.png")}
+                  alt="edit"
+                />
+              </li>
             </Link>
             <div className="modal-function_delete" onClick={deleteHandler}>
-              d
+              <li>
+                <img
+                  src={require("../../../assets/iconmonstr-x-mark-7-32.png")}
+                  alt="edit"
+                />
+                <img
+                  src={require("../../../assets/iconmonstr-x-mark-4-32.png")}
+                  alt="edit"
+                />
+              </li>
             </div>
             <div className="modal-function_like" onClick={postLikeHandler}>
-              {props.likes.length}
+              <li>
+                <img
+                  src={require("../../../assets/iconmonstr-favorite-2-32.png")}
+                  alt="edit"
+                />
+                <img
+                  src={require("../../../assets/iconmonstr-favorite-1-32.png")}
+                  alt="edit"
+                />
+              </li>
             </div>
-            <button onClick={postUnLikeHandler}>unline</button>
           </div>
         </div>
       </div>
