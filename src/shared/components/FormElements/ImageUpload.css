@@ -36,8 +36,9 @@
 }
 
 .image-upload__preview {
-  width: calc(20rem + 5vw);
-  min-height: 20rem;
+  width: calc(30rem + 20vw);
+  max-width: 90vw;
+  min-height: 30rem;
   height: auto;
   border: 1px solid #ccc;
   display: flex;

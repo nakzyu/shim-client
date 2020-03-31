@@ -84,6 +84,12 @@ const ModalOverlay = props => {
     fetchUser();
   }, [fetchUser]);
 
+  const date = () => {
+    const date = Date.now();
+    const calcDate = date - props.date;
+    const calcDay = Math.floor(calcDate / 86400000);
+  };
+
   const content = (
     <Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -109,6 +115,7 @@ const ModalOverlay = props => {
             </div>
 
             <div className="post-modal-description">{props.description}</div>
+            <div className="post-modal-date">{date()}</div>
             <div className="post-modal-function">
               {auth.userId === props.creator ? (
                 <Link to={`/updatePost/${props._id}`}>

@@ -69,7 +69,10 @@ const UpdatePost = props => {
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       {loadedPosts && (
-        <div className="upadte-post">
+        <div className="update-post">
+          <div className="update-post_images">
+            <img src={loadedPosts.image} alt="" />
+          </div>
           <form className="update-post_form form" onSubmit={postUpdateHandler}>
             <div className="update-post_description">
               <Input
@@ -85,9 +88,6 @@ const UpdatePost = props => {
               SUBMIT
             </button>
           </form>
-          <div className="update-post_images">
-            <img className="update-post_image" src={loadedPosts.image} alt="" />
-          </div>
         </div>
       )}
     </Fragment>

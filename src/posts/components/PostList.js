@@ -15,15 +15,18 @@ const PostList = props => {
   const [loadedPosts, setLoadedPosts] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  const deleteLoadedPost = postId => {
-    const dIndex = loadedPosts.findIndex(x => x._id === postId);
-    const originPosts = loadedPosts.slice();
-    originPosts.splice(dIndex, 1);
-    setLoadedPosts(originPosts);
-    if (props.userId) {
-      props.fetchUser();
-    }
-  };
+  const deleteLoadedPost = useCallback(
+    postId => {
+      const dIndex = loadedPosts.findIndex(x => x._id === postId);
+      const originPosts = loadedPosts.slice();
+      originPosts.splice(dIndex, 1);
+      setLoadedPosts(originPosts);
+      if (props.userId) {
+        props.fetchUser();
+      }
+    },
+    [loadedPosts, props]
+  );
 
   const fetchPosts = useCallback(async () => {
     try {
@@ -73,7 +76,7 @@ const PostList = props => {
         setPageCount(state => (state += 1));
       }
     } catch (err) {}
-  }, [isEnd, props.userId, sendRequest, pageCount]);
+  }, [isEnd, props.userId, sendRequest, pageCount, params]);
 
   useEffect(() => {
     fetchPosts();
@@ -224,7 +227,7 @@ const PostList = props => {
         </div>
       );
     } else return;
-  }, [loadedPosts]);
+  }, [loadedPosts, column, deleteLoadedPost]);
 
   useEffect(() => {
     conditionalRender();

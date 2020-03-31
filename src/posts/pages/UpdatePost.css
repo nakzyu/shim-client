@@ -1,6 +1,20 @@
-.update-post_image {
+.update-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.update-post_images {
+  width: calc(30rem + 20vw);
+  max-width: 90vw;
+  min-height: 30rem;
+}
+
+.update-post_images img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  height: 60vw;
 }
 
 .update-post_form {
@@ -13,10 +27,14 @@
 }
 
 .update-post_description {
-  width: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.update-post_description textarea {
+  width: calc(30rem + 20vw);
+  max-width: 90vw;
 }
 
 @media screen and (max-width: 768px) {

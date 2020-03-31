@@ -4,3 +4,8 @@
   align-items: center;
   flex-direction: column;
 }
+
+.add-place-description textarea {
+  width: calc(30rem + 20vw);
+  max-width: 90vw;
+}

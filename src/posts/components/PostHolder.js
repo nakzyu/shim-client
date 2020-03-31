@@ -1,28 +1,19 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import "./PostHolder.css";
 import PostModal from "../../shared/components/UIElements/PostModal";
 
 const PostHolder = props => {
   const [showModal, setShowModal] = useState(false);
-  const [url, setUrl] = useState(false);
+
   const [likedBy, setLikedBy] = useState([...props.likedBy]);
 
-  const urlNow = window.location.href;
-
-  useEffect(() => {
-    setUrl(urlNow);
-  }, []);
-
   const openModalHandelr = () => {
-    console.log(url);
     setShowModal(true);
     console.log(props);
-    window.history.pushState(null, null, `/post/${props._id}`);
   };
 
   const closeModalHandelr = () => {
     setShowModal(false);
-    window.history.replaceState(null, null, `${url}`);
   };
 
   const holderLikeHandler = id => {

@@ -59,14 +59,16 @@ const AddPost = () => {
         onSubmit={postSubmitHandler}
       >
         <ImageUpload id="image" onInput={inputHandler} />
-        <Input
-          id="description"
-          element="textarea"
-          label="Description"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Content required"
-          onInput={inputHandler}
-        />
+        <div className="add-place-description">
+          <Input
+            id="description"
+            element="textarea"
+            label="Description"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Content required"
+            onInput={inputHandler}
+          />
+        </div>
         <button className="submit" type="submit">
           SUBMIT
         </button>

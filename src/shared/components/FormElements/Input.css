@@ -1,4 +1,8 @@
 .form-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: calc(15rem + 5vw);
   margin: 1rem 0;
   font-size: 1.4rem;
