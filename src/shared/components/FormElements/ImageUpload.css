@@ -36,10 +36,9 @@
 }
 
 .image-upload__preview {
-  width: calc(30rem + 20vw);
-  max-width: 90vw;
-  min-height: 30rem;
-  height: auto;
+  width: calc(20rem + 20vw);
+  height: calc(20rem + 20vw);
+  border-radius: 50%;
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;
@@ -49,6 +48,7 @@
 }
 
 .image-upload__preview img {
+  border-radius: 50%;
   width: 100%;
   height: 100%;
   object-fit: cover;

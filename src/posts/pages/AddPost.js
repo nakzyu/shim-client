@@ -58,7 +58,7 @@ const AddPost = () => {
         className="form-control add-place-form"
         onSubmit={postSubmitHandler}
       >
-        <ImageUpload id="image" onInput={inputHandler} />
+        <ImageUpload id="image" onInput={inputHandler} addPost="true" />
         <div className="add-place-description">
           <Input
             id="description"

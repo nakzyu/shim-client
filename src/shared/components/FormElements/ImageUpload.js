@@ -50,7 +50,13 @@ const ImageUpload = props => {
         onChange={pickedHandler}
       />
       <div className={`image-upload center`} onClick={pickImageHandler}>
-        <div className="image-upload__preview">
+        <div
+          className={`${
+            props.addPost
+              ? "add-post-image-upload__preview"
+              : "image-upload__preview"
+          }`}
+        >
           {previewUrl && <img src={previewUrl} alt="Preview" />}
           {!previewUrl && <p>PICK A IMAGE!</p>}
         </div>
