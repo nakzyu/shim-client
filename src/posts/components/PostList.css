@@ -21,6 +21,13 @@
   flex: 1;
 }
 
+.no-post-yet {
+  padding-top: 10rem;
+  font-size: 3rem;
+  color: #ffa6e1;
+  text-shadow: 0.2rem 0.2rem #30f2f5;
+}
+
 /* .post-lists {
   width: 90vw;
   margin: 0;

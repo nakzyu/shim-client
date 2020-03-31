@@ -175,6 +175,13 @@ const Auth = () => {
           <button className="switch" onClick={switchModeHandler}>
             SWITCH TO {isLoginMode ? "SIGNUP" : "LOGIN"}
           </button>
+          <div className="auth-slogan">
+            SHARE
+            <br />
+            YOUR
+            <br />
+            PHOTOS!
+          </div>
         </div>
       </div>
     </Fragment>

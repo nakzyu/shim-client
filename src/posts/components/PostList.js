@@ -10,6 +10,7 @@ import "./PostList.css";
 
 const PostList = props => {
   const [isEnd, setIsEnd] = useState(false);
+  const [isPostExist, setIsPostExist] = useState(true);
   const [pageCount, setPageCount] = useState(2);
   const [loadedPosts, setLoadedPosts] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -19,6 +20,9 @@ const PostList = props => {
     const originPosts = loadedPosts.slice();
     originPosts.splice(dIndex, 1);
     setLoadedPosts(originPosts);
+    if (props.userId) {
+      props.fetchUser();
+    }
   };
 
   const fetchPosts = useCallback(async () => {
@@ -29,6 +33,9 @@ const PostList = props => {
         );
         console.log(responseData);
         setLoadedPosts(responseData.posts);
+        if (responseData.posts.length === 0) {
+          setIsPostExist(false);
+        }
       } else {
         const responseData = await sendRequest(
           `http://localhost:5000/api/posts?page=1&limit=12`
@@ -229,6 +236,11 @@ const PostList = props => {
       {isLoading && <LoadingSpinner asOverlay />}
       <BottomScrollListener onBottom={fetchMorePosts}>
         {loadedPosts && conditionalRender()}
+        {!isPostExist && (
+          <div className="no-post-yet">
+            This user haven't uploaded any post yet.
+          </div>
+        )}
       </BottomScrollListener>
     </Fragment>
   );

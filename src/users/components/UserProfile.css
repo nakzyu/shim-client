@@ -21,11 +21,14 @@
   filter: grayscale(0%);
 }
 
-.user-profile_image_pointer {
+.user-profile_image_access {
   cursor: pointer;
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  filter: grayscale(0%);
 }
 
-.user-profile_image:hover {
+.user-profile_image_access:hover {
   -webkit-filter: grayscale(80%);
   -moz-filter: grayscale(80%);
   filter: grayscale(80%);
@@ -95,6 +98,15 @@
   z-index: 2;
 }
 
+.add-a-post {
+  position: absolute;
+  font-size: 1rem;
+  color: #ffa6e1;
+  text-shadow: 0.2rem 0.2rem #30f2f5;
+  transform: translate(70%);
+  cursor: pointer;
+}
+
 @media screen and (min-width: 736px) {
   .user-profile {
     padding-left: calc(10vw);
@@ -104,5 +116,9 @@
   .user-profile_image {
     width: 12rem;
     height: 12rem;
+  }
+  .add-a-post {
+    font-size: 2rem;
+    transform: translate(45%);
   }
 }

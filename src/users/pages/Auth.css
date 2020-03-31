@@ -18,7 +18,6 @@
   text-shadow: 0.2rem 0.2rem #ff5bfd;
   font-weight: 700;
   font-size: calc(3rem + 2vw);
-  cursor: pointer;
 }
 
 .auth-side img {
@@ -53,4 +52,13 @@
 .submit:hover,
 .submit:focus {
   background: #e2bbca;
+}
+
+.auth-slogan {
+  padding-top: 1rem;
+  font-size: 3rem;
+  color: #ffa6e1;
+  text-shadow: 0.2rem 0.2rem #30f2f5;
+  font-size: calc(2rem + 1vw);
+  font-weight: 700;
 }

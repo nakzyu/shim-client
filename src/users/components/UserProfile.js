@@ -1,17 +1,10 @@
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useContext,
-  Fragment
-} from "react";
+import React, { useEffect, useState, useContext, Fragment } from "react";
 import Input from "../../shared/components/FormElements/Input";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MAXLENGTH
 } from "../../shared/util/validators";
-import { useParams } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -20,11 +13,10 @@ import { useForm } from "../../shared/hooks/form-hook";
 import "./UserProfile.css";
 
 const UserProfile = props => {
-  const userId = useParams().userId;
+  const { fetchUser, loadedUser, userId } = props;
   const auth = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [loadedUser, setLoadedUser] = useState();
   const [formState, inputHandler] = useForm({
     description: {
       value: "",
@@ -68,23 +60,13 @@ const UserProfile = props => {
     setShowForm(!showForm);
   };
 
-  const fetchUser = useCallback(async () => {
-    try {
-      const responseData = await sendRequest(
-        `http://localhost:5000/api/users/${props.userId}`
-      );
-
-      setLoadedUser(responseData);
-    } catch (err) {}
-  }, [props.userId, sendRequest]);
-
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
   const access = () => {
     if (auth.userId === userId) {
-      return "user-profile_image_pointer";
+      return "user-profile_image_access";
     } else {
       return null;
     }
@@ -104,6 +86,16 @@ const UserProfile = props => {
               onClick={openModalHandelr}
             />
           )}
+          {access() &&
+            loadedUser &&
+            loadedUser.image ===
+              "https://res.cloudinary.com/daokgy02f/image/upload/v1585382379/iconmonstr-user-20-64_zyhzxj.png" && (
+              <div className="add-a-post" onClick={openModalHandelr}>
+                ADD
+                <br />A<br />
+                IMAGE
+              </div>
+            )}
           {showModal && auth.userId === userId && (
             <ProfileModal
               show={showModal}
