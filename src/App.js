@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Explore from "./posts/pages/Explore";
@@ -6,6 +6,7 @@ import UpdatePost from "./posts/pages/UpdatePost";
 import User from "../src/users/pages/User";
 import AddPost from "../src/posts/pages/AddPost";
 import Auth from "../src/users/pages/Auth";
+
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
 
@@ -39,6 +40,7 @@ const App = () => {
           <MainNavigation />
           <User />
         </Route>
+
         <Redirect to="/" />
       </Switch>
     );
@@ -56,6 +58,7 @@ const App = () => {
           <MainNavigation />
           <User />
         </Route>
+
         <Redirect to="/" />
       </Switch>
     );
