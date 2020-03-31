@@ -1,13 +1,10 @@
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  Fragment,
-  useParams
-} from "react";
+import React, { useEffect, useState, useCallback, Fragment } from "react";
 import PostHolder from "./PostHolder";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { useParams } from "react-router-dom";
 import BottomScrollListener from "react-bottom-scroll-listener";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 import "./PostList.css";
 
@@ -16,6 +13,13 @@ const PostList = props => {
   const [pageCount, setPageCount] = useState(2);
   const [loadedPosts, setLoadedPosts] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const deleteLoadedPost = postId => {
+    const dIndex = loadedPosts.findIndex(x => x._id === postId);
+    const originPosts = loadedPosts.slice();
+    originPosts.splice(dIndex, 1);
+    setLoadedPosts(originPosts);
+  };
 
   const fetchPosts = useCallback(async () => {
     try {
@@ -35,7 +39,11 @@ const PostList = props => {
     } catch (err) {}
   }, [props.userId, sendRequest]);
 
+  const params = useParams().userId;
+
   const fetchMorePosts = useCallback(async () => {
+    if (params) return;
+
     if (isEnd) {
       return console.log("reached end!");
     }
@@ -94,7 +102,7 @@ const PostList = props => {
     window.addEventListener("resize", updateColumn);
   }, [updateColumn]);
 
-  const conditionalRender = () => {
+  const conditionalRender = useCallback(() => {
     if (column === 4) {
       const line1 = [];
       const line2 = [];
@@ -111,22 +119,22 @@ const PostList = props => {
         <div className="post-lists">
           <div className="post-lists-line1">
             {line1.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
           <div className="post-lists-line2">
             {line2.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
           <div className="post-lists-line3">
             {line3.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
           <div className="post-lists-line4">
             {line4.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
         </div>
@@ -147,17 +155,17 @@ const PostList = props => {
         <div className="post-lists">
           <div className="post-lists-line1">
             {line1.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
           <div className="post-lists-line2">
             {line2.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
           <div className="post-lists-line3">
             {line3.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
         </div>
@@ -178,12 +186,12 @@ const PostList = props => {
         <div className="post-lists">
           <div className="post-lists-line1">
             {line1.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
           <div className="post-lists-line2">
             {line2.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
         </div>
@@ -203,16 +211,22 @@ const PostList = props => {
         <div className="post-lists">
           <div className="post-lists-line1">
             {line1.map(item => (
-              <PostHolder {...item} />
+              <PostHolder {...item} deleteLoadedPost={deleteLoadedPost} />
             ))}
           </div>
         </div>
       );
     } else return;
-  };
+  }, [loadedPosts]);
+
+  useEffect(() => {
+    conditionalRender();
+  }, [conditionalRender]);
 
   return (
     <Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner asOverlay />}
       <BottomScrollListener onBottom={fetchMorePosts}>
         {loadedPosts && conditionalRender()}
       </BottomScrollListener>

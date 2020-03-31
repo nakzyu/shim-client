@@ -1,13 +1,17 @@
 import React, { Fragment, useContext } from "react";
 import { createPortal } from "react-dom";
+import block from "../../hooks/block-hook";
 import "./ProfileModal.css";
 import Backdrop from "./Backdrop";
 import ImageUpload from "../FormElements/ImageUpload";
+import ErrorModal from "./ErrorModal";
+import LoadingSpinner from "./LoadingSpinner";
 import { AuthContext } from "../../context/auth-context";
 import { useForm } from "../../hooks/form-hook";
 import { useHttpClient } from "../../hooks/http-hook";
 
 const ModalOverlay = props => {
+  block();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
   const [formState, inputHandler] = useForm(
@@ -31,27 +35,33 @@ const ModalOverlay = props => {
 
       console.log(formData);
       await sendRequest(
-        `http://localhost:5000/api/users/updateImage/${props.userId}`,
+        `http://localhost:5000/api/users/updateImage/${auth.userId}`,
         "PATCH",
         formData,
         {
           Authorization: "Bearer " + auth.token
         }
       );
+      props.fetchUser();
+      props.onCancel();
     } catch (err) {}
   };
 
   const content = (
-    <div className="modal center profileModal">
-      <div className="modal-wrapper">
-        <form onSubmit={imageSubmitHandler}>
-          <ImageUpload id="image" onInput={inputHandler} />
-          <button className="submit" type="submit">
-            SUBMIT
-          </button>
-        </form>
+    <Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner asOverlay />}
+      <div className="post-modal center profileModal">
+        <div className="post-modal-wrapper">
+          <form onSubmit={imageSubmitHandler}>
+            <ImageUpload id="image" onInput={inputHandler} />
+            <button className="submit" type="submit">
+              SUBMIT
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 
   return createPortal(content, document.getElementById("modal-hook"));

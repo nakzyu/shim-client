@@ -1,7 +1,15 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  Fragment
+} from "react";
 import { useHistory } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 import {
   VALIDATOR_EMAIL,
@@ -116,56 +124,60 @@ const Auth = () => {
   }, [updateAuthImage]);
 
   return (
-    <div className="auth-container">
-      {authImage && (
-        <div className="auth-side">
-          <img
-            src={require("../../assets/modern-building-3034343.jpg")}
-            alt="building"
-          />
-        </div>
-      )}
-      <div>
-        <div className="auth-logo">shim</div>
-        <form className="auth-form" onSubmit={authSubmitHandler}>
-          {!isLoginMode && (
+    <Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      <div className="auth-container">
+        {isLoading && <LoadingSpinner asOverlay />}
+        {authImage && (
+          <div className="auth-side">
+            <img
+              src={require("../../assets/modern-building-3034343.jpg")}
+              alt="building"
+            />
+          </div>
+        )}
+        <div>
+          <div className="auth-logo">shim</div>
+          <form className="auth-form" onSubmit={authSubmitHandler}>
+            {!isLoginMode && (
+              <Input
+                element="input"
+                id="name"
+                type="text"
+                label="Nickname"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter a name."
+                onInput={inputHandler}
+              />
+            )}
             <Input
               element="input"
-              id="name"
-              type="text"
-              label="Nickname"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Please enter a name."
+              id="email"
+              type="email"
+              label="E-Mail"
+              validators={[VALIDATOR_EMAIL()]}
+              errorText="Please enter a valid email address."
               onInput={inputHandler}
             />
-          )}
-          <Input
-            element="input"
-            id="email"
-            type="email"
-            label="E-Mail"
-            validators={[VALIDATOR_EMAIL()]}
-            errorText="Please enter a valid email address."
-            onInput={inputHandler}
-          />
-          <Input
-            element="input"
-            id="password"
-            type="password"
-            label="Password"
-            validators={[VALIDATOR_MINLENGTH(6)]}
-            errorText="Please enter a valid password, at least 5 characters."
-            onInput={inputHandler}
-          />
-          <button className="submit" type="submit">
-            SUBMIT
+            <Input
+              element="input"
+              id="password"
+              type="password"
+              label="Password"
+              validators={[VALIDATOR_MINLENGTH(6)]}
+              errorText="Please enter a valid password, at least 5 characters."
+              onInput={inputHandler}
+            />
+            <button className="submit" type="submit">
+              SUBMIT
+            </button>
+          </form>
+          <button className="switch" onClick={switchModeHandler}>
+            SWITCH TO {isLoginMode ? "SIGNUP" : "LOGIN"}
           </button>
-        </form>
-        <button className="switch" onClick={switchModeHandler}>
-          SWITCH TO {isLoginMode ? "SIGNUP" : "LOGIN"}
-        </button>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

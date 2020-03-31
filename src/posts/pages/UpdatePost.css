@@ -5,53 +5,18 @@
 
 .update-post_form {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 60vw;
+  padding-bottom: 2rem;
 }
 
 .update-post_description {
   width: 75%;
-}
-
-.update-post_edit li img {
-  flex: 1;
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-  display: block;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  transform: translate(-50%, 0%);
-  position: absolute;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -ms-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-.update-post_edit li > img:nth-child(1) {
-  /* first <img> child of <div> */
-  filter: alpha(opacity=100); /* IE stuff */
-  opacity: 1;
-  z-index: 2;
-}
-.update-post_edit li > img:nth-child(2) {
-  /* second <img> child of <div> */
-  filter: alpha(opacity=0); /* IE stuff */
-  opacity: 0;
-  z-index: 1;
-}
-
-.update-post_edit li:hover > img:nth-child(1) {
-  filter: alpha(opacity=0);
-  opacity: 0;
-  z-index: 1;
-}
-.update-post_edit li:hover > img:nth-child(2) {
-  filter: alpha(opacity=100);
-  opacity: 1;
-  z-index: 2;
 }
 
 @media screen and (max-width: 768px) {

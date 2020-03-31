@@ -16,10 +16,13 @@
   height: 7.7rem;
   border-radius: 50%;
   object-fit: cover;
-  cursor: pointer;
   -webkit-filter: grayscale(0%);
   -moz-filter: grayscale(0%);
   filter: grayscale(0%);
+}
+
+.user-profile_image_pointer {
+  cursor: pointer;
 }
 
 .user-profile_image:hover {

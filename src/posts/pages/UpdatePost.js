@@ -5,16 +5,19 @@ import React, {
   useCallback,
   useContext
 } from "react";
-
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import Input from "../../shared/components/FormElements/Input";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useForm } from "../../shared/hooks/form-hook";
 import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./UpdatePost.css";
 
 const UpdatePost = props => {
+  const history = useHistory();
   const auth = useContext(AuthContext);
   const postId = useParams().postId;
   const [loadedPosts, setLoadedPosts] = useState();
@@ -57,16 +60,17 @@ const UpdatePost = props => {
           "Content-Type": "application/json"
         }
       );
-      fetchPosts();
+      history.push("/");
     } catch (err) {}
   };
 
-  console.log(loadedPosts);
   return (
     <Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner asOverlay />}
       {loadedPosts && (
         <div className="upadte-post">
-          <form className="update-post_form form">
+          <form className="update-post_form form" onSubmit={postUpdateHandler}>
             <div className="update-post_description">
               <Input
                 id="description"
@@ -77,23 +81,9 @@ const UpdatePost = props => {
                 onInput={inputHandler}
               />
             </div>
-
-            <ul
-              className="update-post_edit"
-              type="submit"
-              onClick={postUpdateHandler}
-            >
-              <li>
-                <img
-                  src={require("../../assets/iconmonstr-pencil-5-32.png")}
-                  alt="edit"
-                />
-                <img
-                  src={require("../../assets/iconmonstr-pencil-4-32.png")}
-                  alt="edit"
-                />
-              </li>
-            </ul>
+            <button className="submit" type="submit">
+              SUBMIT
+            </button>
           </form>
           <div className="update-post_images">
             <img className="update-post_image" src={loadedPosts.image} alt="" />

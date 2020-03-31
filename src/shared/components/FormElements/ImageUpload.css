@@ -37,7 +37,8 @@
 
 .image-upload__preview {
   width: calc(20rem + 5vw);
-  height: calc(20rem + 5vw);
+  min-height: 20rem;
+  height: auto;
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;

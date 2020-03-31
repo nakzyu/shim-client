@@ -1,6 +1,7 @@
 .form-control {
   width: calc(15rem + 5vw);
   margin: 1rem 0;
+  font-size: 1.4rem;
 }
 
 .form-control label,
@@ -22,6 +23,10 @@
   border: 1px solid #ccc;
   background: #f8f8f8;
   padding: 0.15rem 0.25rem;
+}
+
+.form-control textarea {
+  height: 10rem;
 }
 
 .form-control input:focus,

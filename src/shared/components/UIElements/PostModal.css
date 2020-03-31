@@ -1,0 +1,141 @@
+.post-modal {
+  max-width: 90vw;
+  position: fixed;
+  z-index: 50;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  word-break: break-all;
+}
+
+.post-modal-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.post-modal-image {
+  height: 80vh;
+  width: auto;
+}
+
+.post-modal-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  min-width: 25rem;
+
+  background: white;
+}
+
+.post-modal-content-img_name {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 0.01rem solid lightgray;
+  flex: 1;
+}
+
+.post-modal-content-profile_img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.post-modal-content-profile_name {
+  font-size: 2rem;
+  margin-left: 1rem;
+  color: black;
+}
+
+.post-modal-description {
+  display: flex;
+  flex: 7;
+  padding: 1rem 1rem;
+  font-size: 1.4rem;
+  border-bottom: 0.01rem solid lightgray;
+}
+
+.post-modal-function {
+  transform: translate(-4%);
+  padding-top: 1rem;
+  padding-bottom: 2.2rem;
+
+  display: flex;
+  flex: 0.8;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.post-modal-function li img {
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  display: block;
+
+  position: absolute;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.post-modal-function div img {
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  display: block;
+
+  position: absolute;
+}
+
+.post-modal-function li > img:nth-child(1) {
+  /* first <img> child of <div> */
+  filter: alpha(opacity=100); /* IE stuff */
+  opacity: 1;
+  z-index: 2;
+}
+.post-modal-function li > img:nth-child(2) {
+  /* second <img> child of <div> */
+  filter: alpha(opacity=0); /* IE stuff */
+  opacity: 0;
+  z-index: 1;
+}
+
+.post-modal-function li:hover > img:nth-child(1) {
+  filter: alpha(opacity=0);
+  opacity: 0;
+  z-index: 1;
+}
+.post-modal-function li:hover > img:nth-child(2) {
+  filter: alpha(opacity=100);
+  opacity: 1;
+  z-index: 2;
+}
+
+.white {
+  cursor: none;
+}
+
+.likes-how-many {
+  position: absolute;
+  color: #fe5afc;
+  font-size: 1.5rem;
+  transform: translate(300%, 10%);
+}
+
+@media screen and (max-width: 1024px) {
+  .post-modal-wrapper {
+    flex-direction: column;
+  }
+
+  .post-modal-image {
+    width: 80vw;
+    height: auto;
+  }
+
+  .post-modal-function li img {
+    width: 2rem;
+    height: 2rem;
+  }
+}

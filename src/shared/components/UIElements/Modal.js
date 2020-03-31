@@ -1,150 +1,47 @@
-import React, {
-  Fragment,
-  useCallback,
-  useState,
-  useEffect,
-  useContext
-} from "react";
-import { Link } from "react-router-dom";
-import { createPortal } from "react-dom";
-import "./Modal.css";
-import Backdrop from "./Backdrop";
-import { AuthContext } from "../../context/auth-context";
+import React from "react";
+import ReactDOM from "react-dom";
+import { CSSTransition } from "react-transition-group";
 
-import { useHttpClient } from "../../hooks/http-hook";
+import Backdrop from "./Backdrop";
+import "./Modal.css";
 
 const ModalOverlay = props => {
-  const auth = useContext(AuthContext);
-  const [loadedUser, setLoadedUser] = useState();
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const fetchUser = useCallback(async () => {
-    try {
-      const responseData = await sendRequest(
-        `http://localhost:5000/api/users/${props.creator}`
-      );
-
-      setLoadedUser(responseData);
-    } catch (err) {}
-  }, [sendRequest, props.creator]);
-
-  const deleteHandler = async () => {
-    try {
-      await sendRequest(
-        `http://localhost:5000/api/posts/${props._id}`,
-        "DELETE",
-        null,
-        { Authorization: "Bearer " + auth.token }
-      );
-      props.onDelete(props.id);
-    } catch (err) {}
-  };
-
-  const postLikeHandler = async () => {
-    const responseData = await sendRequest(
-      `http://localhost:5000/api/posts/like/${props._id}`,
-      "POST",
-      null,
-      {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + auth.token
-      }
-    );
-    console.log(responseData);
-  };
-
-  const postUnLikeHandler = async () => {
-    const responseData = await sendRequest(
-      `http://localhost:5000/api/posts/like/${props._id}`,
-      "DELETE",
-      JSON.stringify({
-        userId: auth.userId
-      }),
-      {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + auth.token
-      }
-    );
-    console.log(responseData);
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
-
   const content = (
-    <div className="modal centered">
-      <div className="modal-wrapper">
-        <img className="modal-image" src={`${props.image}`} alt="" />
-        <div className="modal-content">
-          <div className="modal-content-img_name">
-            <Link to={`/user/${props.creator}`}>
-              <img
-                className="modal-content-profile_img"
-                src={loadedUser && loadedUser.image}
-                alt=""
-              />
-            </Link>
-
-            <Link to={`/user/${props.creator}`}>
-              <div className="modal-content-profile_name">
-                {loadedUser && loadedUser.name}
-              </div>
-            </Link>
-          </div>
-
-          <div className="modal-description">{props.description}</div>
-          <div className="modal-function">
-            <Link to={`/updatePost/${props._id}`}>
-              <li>
-                <img
-                  src={require("../../../assets/iconmonstr-pencil-5-32.png")}
-                  alt="edit"
-                />
-                <img
-                  src={require("../../../assets/iconmonstr-pencil-4-32.png")}
-                  alt="edit"
-                />
-              </li>
-            </Link>
-            <div className="modal-function_delete" onClick={deleteHandler}>
-              <li>
-                <img
-                  src={require("../../../assets/iconmonstr-x-mark-7-32.png")}
-                  alt="edit"
-                />
-                <img
-                  src={require("../../../assets/iconmonstr-x-mark-4-32.png")}
-                  alt="edit"
-                />
-              </li>
-            </div>
-            <div className="modal-function_like" onClick={postLikeHandler}>
-              <li>
-                <img
-                  src={require("../../../assets/iconmonstr-favorite-2-32.png")}
-                  alt="edit"
-                />
-                <img
-                  src={require("../../../assets/iconmonstr-favorite-1-32.png")}
-                  alt="edit"
-                />
-              </li>
-            </div>
-          </div>
+    <div className={`modal ${props.className}`} style={props.style}>
+      <header className={`modal__header ${props.headerClass}`}>
+        <h2>{props.header}</h2>
+      </header>
+      <form
+        onSubmit={
+          props.onSubmit ? props.onSubmit : event => event.preventDefault()
+        }
+      >
+        <div className={`modal__content ${props.contentClass}`}>
+          {props.children}
         </div>
-      </div>
+        <footer className={`modal__footer ${props.footerClass}`}>
+          {props.footer}
+        </footer>
+      </form>
     </div>
   );
-
-  return createPortal(content, document.getElementById("modal-hook"));
+  return ReactDOM.createPortal(content, document.getElementById("modal-hook"));
 };
 
 const Modal = props => {
   return (
-    <Fragment>
+    <React.Fragment>
       {props.show && <Backdrop onClick={props.onCancel} />}
-      <ModalOverlay {...props} />
-    </Fragment>
+      <CSSTransition
+        in={props.show}
+        mountOnEnter
+        unmountOnExit
+        timeout={200}
+        classNames="modal"
+      >
+        <ModalOverlay {...props} />
+      </CSSTransition>
+    </React.Fragment>
   );
 };
 
