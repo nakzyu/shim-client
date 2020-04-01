@@ -123,8 +123,8 @@ const UserProfile = props => {
               element="input"
               id="description"
               type="text"
-              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(26)]}
-              errorText="Please enter content"
+              validators={[VALIDATOR_MAXLENGTH(26)]}
+              errorText="Please enter content (less then 26 characters)"
               onInput={inputHandler}
             />
           ) : (

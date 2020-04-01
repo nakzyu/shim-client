@@ -13,6 +13,7 @@
   width: calc(30rem + 20vw);
   min-height: 30rem;
   max-width: 90vw;
+  border: 1px solid #ccc;
 }
 
 .add-post-image-upload__preview img {

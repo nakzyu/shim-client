@@ -6,7 +6,7 @@ import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH
+  VALIDATOR_MAXLENGTH
 } from "../../shared/util/validators";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -64,8 +64,8 @@ const AddPost = () => {
             id="description"
             element="textarea"
             label="Description"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Content required"
+            validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(300)]}
+            errorText="Content required(less than 300 characters)"
             onInput={inputHandler}
           />
         </div>

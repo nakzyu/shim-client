@@ -12,7 +12,10 @@ import Input from "../../shared/components/FormElements/Input";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useForm } from "../../shared/hooks/form-hook";
-import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
+import {
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MAXLENGTH
+} from "../../shared/util/validators";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./UpdatePost.css";
 
@@ -79,8 +82,8 @@ const UpdatePost = props => {
                 id="description"
                 element="textarea"
                 label="Description"
-                validators={[VALIDATOR_REQUIRE()]}
-                errorText="Content required"
+                validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(300)]}
+                errorText="Content required (less than 300 characters)"
                 onInput={inputHandler}
               />
             </div>
