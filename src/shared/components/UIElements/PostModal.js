@@ -14,6 +14,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import { AuthContext } from "../../context/auth-context";
 import block from "../../hooks/block-hook";
 import { useHttpClient } from "../../hooks/http-hook";
+import moment from "moment";
 
 const ModalOverlay = props => {
   block();
@@ -84,10 +85,8 @@ const ModalOverlay = props => {
     fetchUser();
   }, [fetchUser]);
 
-  const date = () => {
-    const date = Date.now();
-    const calcDate = date - props.date;
-    const calcDay = Math.floor(calcDate / 86400000);
+  const date = createdDate => {
+    return moment(parseInt(createdDate)).fromNow();
   };
 
   const content = (
@@ -96,26 +95,30 @@ const ModalOverlay = props => {
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="post-modal centered">
         <div className="post-modal-wrapper">
-          <img className="post-modal-image" src={`${props.image}`} alt="" />
-          <div className="post-modal-content">
-            <div className="post-modal-content-img_name">
-              <Link to={`/user/${props.creator}`}>
-                <img
-                  className="post-modal-content-profile_img"
-                  src={loadedUser && loadedUser.image}
-                  alt=""
-                />
-              </Link>
+          <div className="post-modal-image-wrapper">
+            <img className="post-modal-image" src={`${props.image}`} alt="" />
+          </div>
+          <div className="post-modal-content-wrapper">
+            <div className="post-modal-content">
+              <div className="post-modal-content-img_name">
+                <Link to={`/user/${props.creator}`}>
+                  <img
+                    className="post-modal-content-profile_img"
+                    src={loadedUser && loadedUser.image}
+                    alt=""
+                  />
+                </Link>
 
-              <Link to={`/user/${props.creator}`}>
-                <div className="post-modal-content-profile_name">
-                  {loadedUser && loadedUser.name}
-                </div>
-              </Link>
+                <Link to={`/user/${props.creator}`}>
+                  <div className="post-modal-content-profile_name">
+                    {loadedUser && loadedUser.name}
+                  </div>
+                </Link>
+              </div>
             </div>
 
             <div className="post-modal-description">{props.description}</div>
-            <div className="post-modal-date">{date()}</div>
+            <div className="post-modal-date">{date(props.date)}</div>
             <div className="post-modal-function">
               {auth.userId === props.creator ? (
                 <Link to={`/updatePost/${props._id}`}>
