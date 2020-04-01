@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+
 import "./PostHolder.css";
 import PostModal from "../../shared/components/UIElements/PostModal";
 
@@ -9,11 +10,13 @@ const PostHolder = props => {
 
   const openModalHandelr = () => {
     setShowModal(true);
-    console.log(props);
+
+    window.history.pushState(null, null, "/post");
   };
 
   const closeModalHandelr = () => {
     setShowModal(false);
+    window.history.pushState(null, null, "/");
   };
 
   const holderLikeHandler = id => {

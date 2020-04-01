@@ -50,18 +50,20 @@ const ModalOverlay = props => {
   };
 
   const postLikeHandler = async () => {
-    const responseData = await sendRequest(
-      `http://localhost:5000/api/posts/like/${props._id}`,
-      "POST",
-      null,
-      {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + auth.token
-      }
-    );
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:5000/api/posts/like/${props._id}`,
+        "POST",
+        null,
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token
+        }
+      );
 
-    props.holderLikeHandler(auth.userId);
-    setWhoLikedThisPost(responseData.post.likedBy);
+      props.holderLikeHandler(auth.userId);
+      setWhoLikedThisPost(responseData.post.likedBy);
+    } catch (err) {}
   };
 
   const postUnLikeHandler = async () => {
@@ -122,7 +124,7 @@ const ModalOverlay = props => {
             <div className="post-modal-function">
               {auth.userId === props.creator ? (
                 <Link to={`/updatePost/${props._id}`}>
-                  <li>
+                  <li className="pointer">
                     <img
                       src={require("../../../assets/iconmonstr-pencil-5-32.png")}
                       alt="edit"
@@ -143,12 +145,9 @@ const ModalOverlay = props => {
                 </li>
               )}
 
-              <div
-                className="post-modal-function_delete"
-                onClick={deleteHandler}
-              >
+              <div className="post-modal-function_delete">
                 {auth.userId === props.creator ? (
-                  <li>
+                  <li onClick={deleteHandler} className="pointer">
                     <img
                       src={require("../../../assets/iconmonstr-x-mark-7-32.png")}
                       alt="edit"
@@ -175,6 +174,7 @@ const ModalOverlay = props => {
                 >
                   <div>
                     <img
+                      className={auth.token && "pointer"}
                       src={require("../../../assets/iconmonstr-favorite-1-32.png")}
                       alt="edit"
                     />
@@ -188,10 +188,11 @@ const ModalOverlay = props => {
               ) : (
                 <div
                   className="post-modal-function_not-liked"
-                  onClick={postLikeHandler}
+                  onClick={auth.token && postLikeHandler}
                 >
                   <div>
                     <img
+                      className={auth.token && "pointer"}
                       src={require("../../../assets/iconmonstr-favorite-2-32.png")}
                       alt="edit"
                     />
