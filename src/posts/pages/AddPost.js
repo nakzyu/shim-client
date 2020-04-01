@@ -42,9 +42,14 @@ const AddPost = () => {
       formData.append("image", formState.inputs.image.value);
       formData.append("date", Date.now());
       console.log(formData);
-      await sendRequest("http://localhost:5000/api/posts", "POST", formData, {
-        Authorization: "Bearer " + auth.token
-      });
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/posts`,
+        "POST",
+        formData,
+        {
+          Authorization: "Bearer " + auth.token
+        }
+      );
 
       history.push("/");
     } catch (err) {}

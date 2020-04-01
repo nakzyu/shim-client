@@ -38,7 +38,7 @@ const UserProfile = props => {
 
     try {
       await sendRequest(
-        `http://localhost:5000/api/users/updateDescription/${auth.userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/users/updateDescription/${auth.userId}`,
         "PATCH",
         JSON.stringify({
           description: formState.inputs.description.value

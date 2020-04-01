@@ -32,7 +32,7 @@ const PostList = props => {
     try {
       if (props.userId) {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/posts/user/${props.userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/posts/user/${props.userId}`
         );
         console.log(responseData);
         setLoadedPosts(responseData.posts);
@@ -41,7 +41,7 @@ const PostList = props => {
         }
       } else {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/posts?page=1&limit=12`
+          `${process.env.REACT_APP_BACKEND_URL}/posts?page=1&limit=12`
         );
 
         setLoadedPosts(responseData.results);
@@ -60,13 +60,13 @@ const PostList = props => {
     try {
       if (props.userId) {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/posts/user/${props.userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/posts/user/${props.userId}`
         );
 
         setLoadedPosts(responseData.posts);
       } else {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/posts?page=${pageCount}&limit=12`
+          `${process.env.REACT_APP_BACKEND_URL}/posts?page=${pageCount}&limit=12`
         );
 
         if (responseData.results.length < 12) {

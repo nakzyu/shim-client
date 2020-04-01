@@ -38,7 +38,7 @@ const UpdatePost = props => {
   const fetchPosts = useCallback(async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:5000/api/posts/${postId}`
+        `${process.env.REACT_APP_BACKEND_URL}/posts/${postId}`
       );
       setLoadedPosts(responseData.posts);
     } catch (err) {}
@@ -53,7 +53,7 @@ const UpdatePost = props => {
 
     try {
       await sendRequest(
-        `http://localhost:5000/api/posts/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/posts/${postId}`,
         "PATCH",
         JSON.stringify({
           description: formState.inputs.description.value

@@ -35,7 +35,7 @@ const ModalOverlay = props => {
 
       console.log(formData);
       await sendRequest(
-        `http://localhost:5000/api/users/updateImage/${auth.userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/users/updateImage/${auth.userId}`,
         "PATCH",
         formData,
         {

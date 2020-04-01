@@ -27,7 +27,7 @@ const ModalOverlay = props => {
   const fetchUser = useCallback(async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:5000/api/users/${props.creator}`
+        `${process.env.REACT_APP_BACKEND_URL}/users/${props.creator}`
       );
 
       setLoadedUser(responseData);
@@ -38,7 +38,7 @@ const ModalOverlay = props => {
   const deleteHandler = async () => {
     try {
       await sendRequest(
-        `http://localhost:5000/api/posts/${props._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/posts/${props._id}`,
         "DELETE",
         null,
         { Authorization: "Bearer " + auth.token }
@@ -52,7 +52,7 @@ const ModalOverlay = props => {
   const postLikeHandler = async () => {
     try {
       const responseData = await sendRequest(
-        `http://localhost:5000/api/posts/like/${props._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/posts/like/${props._id}`,
         "POST",
         null,
         {
@@ -68,7 +68,7 @@ const ModalOverlay = props => {
 
   const postUnLikeHandler = async () => {
     const responseData = await sendRequest(
-      `http://localhost:5000/api/posts/unLike/${props._id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/posts/unLike/${props._id}`,
       "DELETE",
       JSON.stringify({
         userId: auth.userId
